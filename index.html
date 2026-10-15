@@ -7,6 +7,7 @@
   <meta name="description" content="RUPAI SHOP — Premium Fashion">
   <title>RUPAI SHOP | Premium Fashion</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="search-addon.css">
 </head>
 <body>
   <div class="topline">RUPAI SHOP-এ স্বাগতম · নতুন কালেকশন এক্সপ্লোর করুন</div>
@@ -19,7 +20,13 @@
       <a href="#home">হোম</a><a href="#categories">ক্যাটাগরি</a><a href="#products">শপ</a><a href="#about">আমাদের সম্পর্কে</a>
     </nav>
     <div class="actions">
-      <button id="searchBtn" class="search-btn" aria-label="Search">⌕ <span>পণ্য খুঁজুন</span></button>
+      <div class="search-control" id="searchControl">
+        <button id="searchBtn" class="search-btn" aria-label="পণ্য খুঁজুন" aria-expanded="false" aria-controls="searchForm">⌕ <span>পণ্য খুঁজুন</span></button>
+        <form id="searchForm" class="search-form" role="search">
+          <input id="searchInput" type="search" placeholder="পণ্যের নাম লিখুন..." aria-label="পণ্যের নাম লিখুন" autocomplete="off">
+          <button type="button" id="searchClose" class="search-close" aria-label="সার্চ বন্ধ করুন">×</button>
+        </form>
+      </div>
       <button id="bagBtn" class="bag-btn">ব্যাগ <b id="bagCount">0</b></button>
       <button id="menuBtn" class="menu-btn" aria-label="Menu">☰</button>
     </div>
@@ -68,7 +75,7 @@
           <select id="sortSelect"><option value="featured">Featured</option><option value="low">দাম: কম থেকে বেশি</option><option value="high">দাম: বেশি থেকে কম</option></select>
         </label>
       </div>
-      <p id="apiStatus" class="api-status">ডেমো প্রিভিউ দেখানো হচ্ছে। লাইভ প্রোডাক্টের জন্য Cloudflare Worker সংযুক্ত করতে হবে।</p>
+      <p id="apiStatus" class="api-status">লাইভ প্রোডাক্ট লোড হচ্ছে...</p>
       <div id="productGrid" class="product-grid"></div>
       <div class="more-row"><span id="productCount"></span><button id="moreBtn" class="text-btn">আরও দেখুন ↓</button></div>
     </section>
