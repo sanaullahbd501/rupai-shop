@@ -73,22 +73,63 @@ function card(p) {
     </article>`;
 }
 
+
 function render() {
-  const query = state.query.trim().toLocaleLowerCase("bn");
-  let list = state.products.filter(p => {
-    const categoryMatch = state.filter === "all" || p.category === state.filter;
-    const queryMatch = !query || p.name.toLocaleLowerCase("bn").includes(query);
-    return categoryMatch && queryMatch;
-  });
+        const query = state.query.trim().toLocaleLowerCase("bn");
+      
+        const aliases = {
+          "saree": ["শাড়ি", "শাড়ি", "saree", "sari"],
+          "শাড়ি": ["শাড়ি", "শাড়ি", "saree", "sari"],
+          "শাড়ি": ["শাড়ি", "শাড়ি", "saree", "sari"],
+          "three piece": ["থ্রি-পিস", "থ্রিপিস", "three piece", "three-piece"],
+          "three-piece": ["থ্রি-পিস", "থ্রিপিস", "three piece", "three-piece"],
+          "থ্রি-পিস": ["থ্রি-পিস", "থ্রিপিস", "three piece", "three-piece"]
+        };
+      
+        const terms = aliases[query] || [query];
+      
+        let list = state.products.filter(p => {
+          const categoryMatch =
+            state.filter === "all" || p.category === state.filter;
+      
+          const searchable = [
+            p.name,
+            p.name_bn,
+            p.slug,
+            p.id,
+            p.category,
+            ...(p.colors || []),
+            p.current,
+            p.old,
+            p.price,
+            p.original_price
+          ].join(" ").toLocaleLowerCase("bn");
+      
+          const queryMatch =
+            !query || terms.some(term => searchable.includes(term));
+      
+          return categoryMatch && queryMatch;
+        });
+      
+        if (state.sort === "low") {
+          list.sort((a, b) => a.current - b.current);
+        }
+      
+        if (state.sort === "high") {
+          list.sort((a, b) => b.current - a.current);
+        }
+      
+        $("#productGrid").innerHTML =
+          list.slice(0, state.visible).map(card).join("") ||
+          '<div class="empty">কোনো প্রোডাক্ট পাওয়া যায়নি। অন্য নামে চেষ্টা করুন।</div>';
+      
+        $("#productCount").textContent = query
+          ? `${list.length}টি সার্চ ফলাফল`
+          : `${list.length}টি প্রোডাক্ট`;
+      
+        $("#moreBtn").hidden = state.visible >= list.length;
+      }
 
-  if (state.sort === "low") list.sort((a, b) => a.current - b.current);
-  if (state.sort === "high") list.sort((a, b) => b.current - a.current);
-
-  $("#productGrid").innerHTML = list.slice(0, state.visible).map(card).join("") ||
-    '<div class="empty">কোনো প্রোডাক্ট পাওয়া যায়নি। অন্য নামে চেষ্টা করুন।</div>';
-  $("#productCount").textContent = query ? `${list.length}টি সার্চ ফলাফল` : `${list.length}টি প্রোডাক্ট`;
-  $("#moreBtn").hidden = state.visible >= list.length;
-}
 
 async function loadProducts() {
   $("#apiStatus").textContent = "আসল প্রোডাক্ট লোড হচ্ছে...";
