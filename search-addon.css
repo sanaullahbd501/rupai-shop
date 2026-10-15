@@ -1,0 +1,25 @@
+/* RUPAI SHOP animated search: desktop expands inline; mobile opens a full-width row. */
+.search-control{display:flex;align-items:center;position:relative;min-width:0}
+.search-control .search-btn{white-space:nowrap;position:relative;z-index:2;transition:border-radius .25s,border-color .25s,background .25s}
+.search-control.open .search-btn{border-radius:24px 0 0 24px;border-right-color:transparent;background:#fff}
+.search-form{display:flex;align-items:center;width:0;max-width:0;height:42px;opacity:0;overflow:hidden;pointer-events:none;border:1px solid var(--line);border-left:0;border-radius:0 24px 24px 0;background:#fff;transition:width .32s ease,max-width .32s ease,opacity .2s ease}
+.search-control.open .search-form{width:clamp(190px,22vw,310px);max-width:310px;opacity:1;pointer-events:auto}
+.search-form input{width:100%;min-width:0;border:0;outline:0;background:transparent;padding:0 8px 0 2px;color:var(--ink);font:12px var(--sans)}
+.search-form input::placeholder{color:#a09398}
+.search-close{flex:0 0 32px;width:32px;height:32px;margin-right:4px;border:0;border-radius:50%;background:transparent;color:var(--muted);font-size:21px;line-height:1;cursor:pointer}
+.search-close:hover{background:var(--pink);color:var(--wine)}
+.search-control.open .search-btn span{display:none}
+@media(max-width:1000px) and (min-width:701px){
+ .search-control.open .search-form{width:clamp(165px,20vw,240px)}
+ .header{gap:12px}.header nav{gap:12px}
+}
+@media(max-width:700px){
+ .search-control{position:static}
+ .search-control.open .search-btn{border-radius:22px;border-color:var(--wine);background:var(--paper)}
+ .search-control.open .search-form{position:absolute;left:4%;right:4%;top:calc(100% + 1px);z-index:10;width:92%;max-width:none;height:0;opacity:0;border:0;border-radius:0 0 12px 12px;box-shadow:0 12px 20px #32101b18;pointer-events:none;transition:height .25s ease,opacity .2s ease,padding .25s ease}
+ .search-control.open .search-form{height:58px;opacity:1;padding:8px 10px;border:1px solid var(--line);border-top:0;pointer-events:auto}
+ .search-control.open .search-form input{padding-left:10px;font-size:14px}
+ .search-control.open .search-close{flex-basis:34px}
+ .header:has(.search-control.open){z-index:120}
+}
+@media(prefers-reduced-motion:reduce){.search-form,.search-control .search-btn{transition:none}}
