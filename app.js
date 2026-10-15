@@ -28,7 +28,7 @@ function normalize(p) {
   else if (/থ্রি[\\s-]?পিস|থ্রিপিস|three[\\s-]?piece/i.test(name)) category = "three-piece";
 
   const images = Array.isArray(p.images)
-    ? p.images.filter(x => typeof x === "string" && /^https?:\\/\\//i.test(x))
+    ? p.images.filter(x => typeof x === "string" && /^https?:\/\//i.test(x))
     : [];
 
   let colors = [];
