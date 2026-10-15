@@ -74,6 +74,45 @@ function card(p) {
 }
 
 
+    function renderHeroProducts() {
+          const host = document.querySelector("#heroProductCollage");
+        
+          if (!host || !state.products.length) return;
+        
+          const featured = state.products
+            .filter(p => Array.isArray(p.images) && p.images.length > 0)
+            .slice(0, 4);
+        
+          if (!featured.length) return;
+        
+          host.innerHTML = featured.map(p => {
+            const image = p.images[0];
+            const discount = Number(p.discount) > 0
+              ? `<span class="hero-product-discount">-${Number(p.discount)}%</span>`
+              : "";
+        
+            const oldPrice = p.old > p.current
+              ? `<del>${money(p.old)}</del>`
+              : "";
+        
+            return `
+              <article class="hero-product-card">
+                <img
+                  src="${esc(image)}"
+                  alt="${esc(p.name)}"
+                  loading="eager"
+                >
+                ${discount}
+                <div class="hero-product-price">
+                  <span>${money(p.current)}</span>
+                  ${oldPrice}
+                </div>
+              </article>
+            `;
+          }).join("");
+        }
+
+
 function render() {
         const query = state.query.trim().toLocaleLowerCase("bn");
       
@@ -140,6 +179,7 @@ async function loadProducts() {
     if (!result.success || !Array.isArray(result.products)) throw new Error("Invalid product response");
 
     state.products = result.products.map(normalize);
+    renderHeroProducts();
     state.visible = 10;
     $("#apiStatus").textContent = `লাইভ ক্যাটালগ · ${state.products.length}টি প্রোডাক্ট`;
     render();
