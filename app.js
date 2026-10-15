@@ -74,34 +74,51 @@ function card(p) {
 }
 
 
-    function renderHeroProducts() {
+    
+function renderHeroProducts() {
           const host = document.querySelector("#heroProductCollage");
         
-          if (!host || !state.products.length) return;
+          if (!host) {
+            console.error("Hero collage element not found");
+            return;
+          }
         
-          const featured = state.products
-            .filter(p => Array.isArray(p.images) && p.images.length > 0)
-            .slice(0, 4);
+          const featured = state.products.filter(p =>
+            Array.isArray(p.images) &&
+            p.images.some(image =>
+              typeof image === "string" &&
+              /^https?:\/\//i.test(image)
+            )
+          ).slice(0, 4);
         
-          if (!featured.length) return;
+          console.log("Hero products:", state.products.length);
+          console.log("Hero products with images:", featured.length);
+          console.log("Hero image URLs:", featured.map(p => p.images[0]));
+        
+          if (!featured.length) {
+            console.error("No products with valid image URLs found for Hero");
+            return;
+          }
         
           host.innerHTML = featured.map(p => {
-            const image = p.images[0];
+            const image = p.images.find(url =>
+              typeof url === "string" &&
+              /^https?:\/\//i.test(url)
+            );
+        
             const discount = Number(p.discount) > 0
               ? `<span class="hero-product-discount">-${Number(p.discount)}%</span>`
               : "";
         
-            const oldPrice = p.old > p.current
+            const oldPrice = p.old && p.old > p.current
               ? `<del>${money(p.old)}</del>`
               : "";
         
             return `
               <article class="hero-product-card">
-                <img
-                  src="${esc(image)}"
-                  alt="${esc(p.name)}"
-                  loading="eager"
-                >
+                <img src="${esc(image)}"
+                     alt="${esc(p.name)}"
+                     loading="eager">
                 ${discount}
                 <div class="hero-product-price">
                   <span>${money(p.current)}</span>
@@ -111,6 +128,7 @@ function card(p) {
             `;
           }).join("");
         }
+
 
 
 function render() {
