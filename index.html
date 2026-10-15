@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#861830">
+  <meta name="description" content="RUPAI SHOP — Premium Fashion">
+  <title>RUPAI SHOP | Premium Fashion</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topline">RUPAI SHOP-এ স্বাগতম · নতুন কালেকশন এক্সপ্লোর করুন</div>
+  <header class="header">
+    <a class="brand" href="#" aria-label="RUPAI SHOP home">
+      <img src="assets/rupai-logo.jpg" alt="RUPAI SHOP logo">
+      <span><b>রুপাই শপ</b><small>PREMIUM FASHION</small></span>
+    </a>
+    <nav id="nav">
+      <a href="#home">হোম</a><a href="#categories">ক্যাটাগরি</a><a href="#products">শপ</a><a href="#about">আমাদের সম্পর্কে</a>
+    </nav>
+    <div class="actions">
+      <button id="searchBtn" class="search-btn" aria-label="Search">⌕ <span>পণ্য খুঁজুন</span></button>
+      <button id="bagBtn" class="bag-btn">ব্যাগ <b id="bagCount">0</b></button>
+      <button id="menuBtn" class="menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">THE RUPAI EDIT</p>
+        <h1>আপনার স্টাইল,<br><em>আপনার গল্প।</em></h1>
+        <p>রুচিশীল ফ্যাশন, মন ছুঁয়ে যাওয়া ডিজাইন আর আপনার প্রতিদিনের জন্য বেছে নেওয়া কালেকশন।</p>
+        <a class="primary" href="#products">কালেকশন দেখুন <span>↗</span></a>
+        <div class="hero-note"><i></i> Style made personal</div>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-shape shape-one"></div><div class="visual-shape shape-two"></div>
+        <div class="visual-label">RUPAI <span>NEW COLLECTION</span></div>
+        <div class="visual-seal">R<br><small>SHOP</small></div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div><span>01</span> নির্বাচিত ফ্যাশন কালেকশন</div>
+      <div><span>02</span> সহজ অর্ডার অভিজ্ঞতা</div>
+      <div><span>03</span> আপনার স্টাইল, আপনার পছন্দ</div>
+    </section>
+
+    <section class="category-section section" id="categories">
+      <div class="section-title"><div><p class="eyebrow">EXPLORE YOUR STYLE</p><h2>ক্যাটাগরি <em>এক্সপ্লোর করুন</em></h2></div><p>পছন্দের কালেকশন বেছে নিন</p></div>
+      <div class="category-grid">
+        <a class="category cat-saree" href="#products" data-filter="saree"><span>01 / COLLECTION</span><strong>শাড়ি</strong><i>এক্সপ্লোর করুন ↗</i></a>
+        <a class="category cat-three" href="#products" data-filter="three-piece"><span>02 / COLLECTION</span><strong>থ্রি-পিস</strong><i>এক্সপ্লোর করুন ↗</i></a>
+        <a class="category cat-new" href="#products" data-filter="all"><span>03 / THE EDIT</span><strong>নতুন কালেকশন</strong><i>এক্সপ্লোর করুন ↗</i></a>
+      </div>
+    </section>
+
+    <section class="section products-section" id="products">
+      <div class="section-title"><div><p class="eyebrow">CURATED FOR YOU</p><h2>জনপ্রিয় <em>কালেকশন</em></h2></div><p>RUPAI SHOP-এর পছন্দের কালেকশন</p></div>
+      <div class="toolbar">
+        <div class="filters">
+          <button class="filter active" data-filter="all">সব প্রোডাক্ট</button>
+          <button class="filter" data-filter="saree">শাড়ি</button>
+          <button class="filter" data-filter="three-piece">থ্রি-পিস</button>
+        </div>
+        <label>সাজান
+          <select id="sortSelect"><option value="featured">Featured</option><option value="low">দাম: কম থেকে বেশি</option><option value="high">দাম: বেশি থেকে কম</option></select>
+        </label>
+      </div>
+      <p id="apiStatus" class="api-status">ডেমো প্রিভিউ দেখানো হচ্ছে। লাইভ প্রোডাক্টের জন্য Cloudflare Worker সংযুক্ত করতে হবে।</p>
+      <div id="productGrid" class="product-grid"></div>
+      <div class="more-row"><span id="productCount"></span><button id="moreBtn" class="text-btn">আরও দেখুন ↓</button></div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-art"><span>R.</span></div>
+      <div class="about-copy"><p class="eyebrow">A LITTLE MORE PERSONAL</p><h2>Elegance in every<br><em>little detail.</em></h2><p>RUPAI SHOP-এ আমরা বিশ্বাস করি, ফ্যাশন শুধু পোশাক নয়—এটি নিজের মতো করে নিজেকে প্রকাশ করা। আপনার পছন্দের কালেকশনকে আরও সহজে খুঁজে পাওয়ার অভিজ্ঞতা তৈরি করাই আমাদের লক্ষ্য।</p><a href="#products" class="underlink">শপিং শুরু করুন ↗</a></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top"><a class="brand footer-brand" href="#"><img src="assets/rupai-logo.jpg" alt=""><span><b>রুপাই শপ</b><small>PREMIUM FASHION</small></span></a><p>নিজের স্টাইল, নিজের গল্প।</p><a href="#home" class="back-top">উপরে যান ↑</a></div>
+    <div class="footer-bottom"><span>© <span id="year"></span> RUPAI SHOP. All rights reserved.</span><span>Made for your style.</span></div>
+  </footer>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
